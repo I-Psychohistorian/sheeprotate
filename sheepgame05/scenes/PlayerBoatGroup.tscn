@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/PlayerCamera.gd" type="Script" id=1]
+[ext_resource path="res://scripts/boat.gd" type="Script" id=2]
+[ext_resource path="res://sprites/SeaSheepRaft_Shrunk.png" type="Texture" id=3]
+[ext_resource path="res://sprites/pointy_shape_transparent.png" type="Texture" id=4]
+[ext_resource path="res://scripts/BoatSprite.gd" type="Script" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.7244
+
+[node name="PlayerBoatGroup" type="Node"]
+
+[node name="PlayerBoat" type="KinematicBody2D" parent="." groups=[
+"Player",
+]]
+position = Vector2( 300, 299 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoat"]
+scale = Vector2( 1.4, 1.4 )
+shape = SubResource( 1 )
+
+[node name="PointyShape" type="Sprite" parent="PlayerBoat"]
+position = Vector2( 0, -5 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 4 )
+
+[node name="Forward" type="Node2D" parent="PlayerBoat"]
+position = Vector2( 0, -39.2862 )
+
+[node name="backwards" type="RayCast2D" parent="PlayerBoat/Forward"]
+
+[node name="BoatSprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+script = ExtResource( 5 )
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2( 0.594604, 0 )
+current = true
+process_mode = 0
+script = ExtResource( 1 )
